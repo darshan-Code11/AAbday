@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #ffe6f0, #fff0f6);
+      text-align: center;
+      padding: 60px 20px;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #d6336c;
+      margin-bottom: 10px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      color: #6c757d;
+      font-weight: 400;
+      max-width: 600px;
+      margin: 0 auto 20px auto;
+      animation: fadeInUp 1.5s ease-out;
+    }
+
+    #age-line {
+      font-size: 1.3rem;
+      color: #c2185b;
+      font-weight: 500;
+      margin-bottom: 30px;
+      animation: fadeInUp 2s ease-out;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 1rem;
+      color: white;
+      background-color: #e64980;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #d6336c;
+    }
+
+    #surprise {
+      display: none;
+      margin-top: 40px;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    img {
+      max-width: 300px;
+      border-radius: 16px;
+      margin-top: 20px;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <h1>🎉 Happy Birthday! 🎂</h1>
+  <h3>Wishing you a day filled with beautiful moments, heartfelt smiles, and all the nemdhii you deserve.</h3>
+
+  <div id="age-line">Celebrating 20 years of topperism! 🌟</div>
+
+  <button onclick="showSurprise()">Open Your Surprise 🎁</button>
+
+  <div id="surprise">
+    <img src="birthday.jpg" alt="Birthday Surprise">
+  </div>
+
+  <audio id="bg-music" src="happy-birthday-314197.mp3" loop></audio>
+  <canvas id="confetti-canvas"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    // 🎂 Dynamic Age Line
+    const birthYear = 2005;
+    const currentYear = new Date().getFullYear();
+    const age = currentYear - birthYear;
+    document.getElementById("age-line").innerText = `Celebrating ${age} years of  topperism! 🌟`;
+
+    // 🎊 Confetti & Music
+    const music = document.getElementById('bg-music');
+    const canvas = document.getElementById('confetti-canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    function showSurprise() {
+      document.getElementById("surprise").style.display = "block";
+      music.play();
+
+      const duration = 4000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 6,
+          angle: 60,
+          spread: 70,
+          origin: { x: 0 }
+        });
+        confetti({
+          particleCount: 6,
+          angle: 120,
+          spread: 70,
+          origin: { x: 1 }
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+  </script>
+
+</body>
+</html>
